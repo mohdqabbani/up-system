@@ -36,11 +36,7 @@ if (isset($_POST['add'])) {
     exit();
 }
 if (isset($_POST['deleteStudent'])) {
-    $studenClass = new student_method();
-    $studenClass->std_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-    $studenClass->deleteStudent($studenClass->std_id);
-    header("location:student.php");
-    exit();
+    
 }
 if (isset($_POST['fetchById'])) {
     $studenClass = new student_method();

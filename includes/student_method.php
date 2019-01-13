@@ -16,6 +16,7 @@ class student_method extends connection {
     public $std_dob;
     public $std_ref_mobile;
     public $std_notes;
+    public $std_active = 1;
 
     public function fetchAll() {
         $sql = "SELECT * FROM `student`";
@@ -25,33 +26,29 @@ class student_method extends connection {
             $studentSet[] = $value;
         }
     }
-    
-    public function fetchById($id){
-        $id   = $this->std_id ; 
-        $sql  = "SELECT * FROM `student` WHERE `std_id` = $id ";
+
+    public function fetchById($id) {
+        $id = $this->std_id;
+        $sql = "SELECT * FROM `student` WHERE `std_id` = $id ";
         $stmt = $this->connect->query($sql);
         $studentSet = array();
         foreach ($stmt as $value) {
             $studentSet[] = $value;
         }
-      
-        
     }
 
     public function insertStudent() {
-        
+
         $sql = "INSERT INTO `student`(`std_name`, `std_mobile`, `std_email`, `std_photo`, "
                 . "`std_id_copy`, `std_address`, `std_age`, `std_gender`, `std_dob`, `std_ref_mobile`, "
-                . "`notes`) VALUES ('$this->std_name',$this->std_mobile,'$this->std_email','$this->std_photo',"
+                . "`notes`,`std_active`) VALUES ('$this->std_name',$this->std_mobile,'$this->std_email','$this->std_photo',"
                 . "'$this->std_id_copy','$this->std_address',"
-                . "$this->std_age,'$this->std_gender','$this->std_dob',$this->std_ref_mobile,'$this->std_notes')";
+                . "$this->std_age,'$this->std_gender','$this->std_dob',$this->std_ref_mobile,'$this->std_notes',$this->std_active)";
         $stmt = $this->connect->query($sql);
     }
 
     public function deleteStudent($id) {
-        $id = $this->std_id;
-        $sql = "DELETE FROM `student` WHERE `std_id` = $id";
-        $stmt = $this->connect->query($sql);
+        
     }
 
     public function updateStudent($id) {
