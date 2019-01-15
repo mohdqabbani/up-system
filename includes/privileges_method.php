@@ -1,16 +1,26 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require 'connection.php';
 
-/**
- * Description of privileges_method
- *
- * @author Mohammad
- */
-class privileges_method {
-    //put your code here
+class privileges_method extends connection {
+
+    public $priv_id;
+    public $admin_id;
+    public $pages;
+
+    public function fetchAll(){
+        
+    }
+    public function fetchById($id){
+        
+    }
+    public function insertPriv(){
+        
+    }
+    public function deletePriv($id){
+        
+    }
+    public function updatePriv($id){
+        
+    }
 }

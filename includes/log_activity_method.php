@@ -1,16 +1,32 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require 'connection.php';
 
-/**
- * Description of log_activity_method
- *
- * @author Mohammad
- */
-class log_activity_method {
-    //put your code here
+class log_activity_method extends connection {
+
+    public $log_id;
+    public $admin_id;
+    public $date;
+    public $time;
+    
+    public function fetchAll(){
+        
+    }
+    
+    public function fetchById($id){
+        
+    }
+    
+    public function insertLog(){
+        
+    }
+    
+    public function deleteLog($id){
+        
+    }
+    
+    public function updateLog($id){
+        
+    }
+    
 }

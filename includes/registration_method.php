@@ -29,14 +29,23 @@ class registration_method extends connection {
     }
 
     public function insertReg() {
-        
+        $regClass = new registration_method();
+        $sql = "INSERT INTO `registration`(`std_id`, `admin_id`, `course_name`, `course_hours`, "
+                . "`course_time`, `course_days`, `course_start_date`, `course_end_date`, `course_test_result`, "
+                . "`course_fees`, `payment_method`, `payment_type`, `discount_amount`, `discount_percentage`) "
+                . "VALUES ('$this->std_id',$this->admin_id,'$this->course_name','$this->course_hours','$this->course_time',"
+                . "'$this->course_days','$this->course_start_date',"
+                . "'$this->course_end_date',$this->course_test_result,$this->course_fees,'$this->payment_method',"
+                . "'$this->payment_type',$this->discount_amount,'$this->discount_percetage')";
+        $stmt = $regClass->connect->query($sql);
     }
-    public function deleteReg($id){
-        
-    }
-    public function updateReg($id){
+
+    public function deleteReg($id) {
         
     }
 
-    
+    public function updateReg($id) {
+        
+    }
+
 }

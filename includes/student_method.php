@@ -48,25 +48,27 @@ class student_method extends connection {
     }
 
     public function deleteStudent($id) {
-        
+        $studentClass = new student_method();
+        $id = $this->std_id;
+
+        $sql = "UPDATE `student` SET `std_name`='$this->std_name', `std_mobile`='$this->std_mobile', "
+                . "`std_email`='$this->std_email', `std_active`=0 WHERE`std_id` = $id";
+
+        $studentClass->connect->query($sql);
     }
 
     public function updateStudent($id) {
+        $studentClass = new student_method();
         $id = $this->std_id;
-        if (!empty($this->std_photo) && !empty($this->std_id_copy)) {
-            $sql = "UPDATE `student` SET `std_name`='$this->std_name',`std_mobile`=$this->std_mobile,"
-                    . "`std_email`='$this->std_email',`std_photo`='$this->std_photo',`std_id_copy`='$this->std_id_copy',"
-                    . "`std_address`='$this->std_address',"
-                    . "`std_age`=$this->std_age,`std_gender`='$this->std_gender',`std_dob`=$this->std_dob,"
-                    . "`std_ref_mobile`=$this->std_ref_mobile,"
-                    . "`notes`='$this->std_notes' WHERE `std_id` = $id";
-        } else if (!empty($this->std_photo)) {
-            
-        } else if (!empty($this->std_id_copy)) {
-            
-        } else if (empty($this->std_photo) && empty($this->std_id_copy)) {
-            
-        }
+
+        $sql = "UPDATE `student` SET `std_name`='$this->std_name',`std_mobile`='$this->std_mobile',"
+                . "`std_email`='$this->std_email',"
+                . "`std_photo`='$this->std_photo',`std_id_copy`='$this->std_id_copy',`std_address`='$this->std_address',"
+                . "`std_age`=$this->std_age,"
+                . "`std_gender`='$this->std_gender',`std_dob`='$this->std_dob',`std_ref_mobile`='$this->std_ref_mobile',"
+                . "`notes`='$this->std_notes',"
+                . "`std_active`= 1 WHERE `std_id` = $id";
+        $studentClass->connect->query($sql);
     }
 
 }
