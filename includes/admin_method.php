@@ -1,6 +1,6 @@
 <?php
 
-require 'connection.php';
+require_once 'connection.php';
 
 class admin_method extends connection {
 
@@ -17,35 +17,46 @@ class admin_method extends connection {
             $adminSet[] = $value;
         }
         return $adminSet;
-        
     }
 
     public function fetchById($id) {
-
         $sql = "SELECT * FROM `admin` WHERE `admin_id` = $id";
         $stmt = $this->connect->query($sql);
-        $adminSet = $stmt->fetchAll();
+        $stmt->fetchAll();
     }
 
     public function insertAdmin() {
-
-        $sql = "INSERT INTO `admin`(`admin_name`, `admin_username`, "
-                . "`admin_password`, `admin_status`) VALUES "
-                . "('$this->admin_name','$this->admin_username','$this->admin_password',$this->admin_status)";
-        $stmt = $this->connect->query($sql);
+        try {
+            $sql = "INSERT INTO `admin`(`admin_name`, `admin_username`, "
+                    . "`admin_password`, `admin_status`) VALUES "
+                    . "('$this->admin_name','$this->admin_username','$this->admin_password',$this->admin_status)";
+            $this->connect->query($sql);
+            echo 'Admin added Successfully ';
+        } catch (Exception $e) {
+            echo 'Admin Doesn`t added successfully ' . $e->getMessage();
+        }
     }
 
     public function deleteAdmin($id) {
-        $id = $this->admin_id;
-        $sql = "DELETE FROM `admin` WHERE `admin_id` = $id";
-        $stmt = $this->connect->query($sql);
+        try {
+            $id = $this->admin_id;
+            $sql = "DELETE FROM `admin` WHERE `admin_id` = $id";
+            $this->connect->query($sql);
+            echo 'Admin Was Deleted Successfully ';
+        } catch (Exception $ex) {
+            echo 'Admin Dosen`t Deleted Successfully' . $ex->getMessage();
+        }
     }
 
     public function updateAdmin($id) {
-        $id = $this->admin_id;
-        $sql = "UPDATE `admin` SET `admin_name`='$this->admin_name',`admin_username`='$this->admin_username',"
-                . "`admin_password`='$this->admin_password',`admin_status`=$this->admin_status WHERE `admin_id` = $id";
-        $stmt = $this->connect->query($sql);
+        try {
+            $id = $this->admin_id;
+            $sql = "UPDATE `admin` SET `admin_name`='$this->admin_name',`admin_username`='$this->admin_username',"
+                    . "`admin_password`='$this->admin_password',`admin_status`=$this->admin_status WHERE `admin_id` = $id";
+            $this->connect->query($sql);
+        } catch (Exception $ex) {
+            echo 'Update Not Successed' . $ex->getMessage();
+        }
     }
 
 }

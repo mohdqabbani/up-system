@@ -1,5 +1,5 @@
 <?php
-
+require_once 'connection.php';
 
 class registration_method extends connection {
 
@@ -20,14 +20,13 @@ class registration_method extends connection {
     public $discount_percetage;
 
     public function fetchAll() {
-        $regClass =  new registration_method();
-        $sql      = "SELECT * FROM `registration`";
+
+        $sql = "SELECT * FROM `registration`";
         $stmt = $this->connect->query($sql);
         foreach ($stmt as $value) {
             $registrationSet[] = $value;
         }
         return $registrationSet;
-        
     }
 
     public function fetchById($id) {
@@ -37,32 +36,43 @@ class registration_method extends connection {
     }
 
     public function insertReg() {
-        $regClass = new registration_method();
-        $sql = "INSERT INTO `registration`(`std_id`, `admin_id`, `course_name`, `course_hours`, "
-                . "`course_time`, `course_days`, `course_start_date`, `course_end_date`, `course_test_result`, "
-                . "`course_fees`, `payment_method`, `payment_type`, `discount_amount`, `discount_percentage`) "
-                . "VALUES ('$this->std_id',$this->admin_id,'$this->course_name','$this->course_hours','$this->course_time',"
-                . "'$this->course_days','$this->course_start_date',"
-                . "'$this->course_end_date',$this->course_test_result,$this->course_fees,'$this->payment_method',"
-                . "'$this->payment_type',$this->discount_amount,'$this->discount_percetage')";
-        $stmt = $regClass->connect->query($sql);
+        try {
+            $sql = "INSERT INTO `registration`(`std_id`, `admin_id`, `course_name`, `course_hours`, "
+                    . "`course_time`, `course_days`, `course_start_date`, `course_end_date`, `course_test_result`, "
+                    . "`course_fees`, `payment_method`, `payment_type`, `discount_amount`, `discount_percentage`) "
+                    . "VALUES ('$this->std_id',$this->admin_id,'$this->course_name','$this->course_hours','$this->course_time',"
+                    . "'$this->course_days','$this->course_start_date',"
+                    . "'$this->course_end_date',$this->course_test_result,$this->course_fees,'$this->payment_method',"
+                    . "'$this->payment_type',$this->discount_amount,'$this->discount_percetage')";
+            $stmt = $this->connect->query($sql);
+            echo 'Successfully Adding';
+        } catch (Exception $ex) {
+            echo 'Failed Adding ' . $ex->getMessage();
+        }
     }
 
     public function deleteReg($id) {
-        $regClass = new registration_method();
-        $sql      = "DELETE FROM `registration` WHERE `reg_id` = $id";
-        $stmt = $regClass->connect->query($sql);
+        try {
+            $sql = "DELETE FROM `registration` WHERE `reg_id` = $id";
+            $stmt = $this->connect->query($sql);
+            echo 'Successfully Deleting';
+        } catch (Exception $ex) {
+            echo 'Failed Deleting' . $ex->getMessage();
+        }
     }
 
     public function updateReg($id) {
-        $regClass         = new registration_method();
-        
-        $sql = "UPDATE `registration` SET `std_id`=$regClass->std_id,`admin_id`=$regClass->admin_id,"
-                . "`course_name`='$regClass->course_name',`course_hours`='$regClass->course_hours',`course_time`='$regClass->course_time',"
-                . "`course_days`='$regClass->course_days',`course_start_date`='$regClass->course_start_date',`course_end_date`='$regClass->course_end_date',"
-                . "`course_test_result`=$regClass->course_test_result,`course_fees`=$regClass->course_fees,`payment_method`='$regClass->payment_method',"
-                . "`payment_type`='$regClass->payment_type',`discount_amount`=$regClass->discount_amount,`discount_percentage`='$regClass->discount_percetage' WHERE `reg_id`= $id";
-        $regClass->connect->query($sql);
+        try {
+            $sql = "UPDATE `registration` SET `std_id`=$this->std_id,`admin_id`=$this->admin_id,"
+                    . "`course_name`='$this->course_name',`course_hours`='$this->course_hours',`course_time`='$this->course_time',"
+                    . "`course_days`='$this->course_days',`course_start_date`='$this->course_start_date',`course_end_date`='$this->course_end_date',"
+                    . "`course_test_result`=$this->course_test_result,`course_fees`=$this->course_fees,`payment_method`='$this->payment_method',"
+                    . "`payment_type`='$this->payment_type',`discount_amount`=$this->discount_amount,`discount_percentage`='$this->discount_percetage' WHERE `reg_id`= $id";
+            $this->connect->query($sql);
+            echo 'Successfully Updating';
+        } catch (Exception $ex) {
+            echo 'Failed Updating ' . $ex->getMessage();
+        }
     }
 
 }

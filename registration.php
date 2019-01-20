@@ -1,7 +1,5 @@
 <?php
 
-//require './includes/registration_method.php';
-//require './includes/admin_method.php';
 function __autoload($className) {
     require_once './includes/' . "$className.php";
 }

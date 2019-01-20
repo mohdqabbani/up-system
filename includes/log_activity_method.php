@@ -1,6 +1,6 @@
 <?php
 
-//require 'connection.php';
+require_once 'connection.php';
 
 class log_activity_method extends connection {
 
@@ -8,46 +8,53 @@ class log_activity_method extends connection {
     public $admin_id;
     public $date;
     public $time;
-    
-    public function fetchAll(){
-        $logClass =  new log_activity_method();
+
+    public function fetchAll() {
+
         $sql = "SELECT * FROM `log_activity`";
-        $stmt = $logClass->connect->query($sql);
+        $stmt = $this->connect->query($sql);
         foreach ($stmt as $value) {
             $logSet[] = $value;
         }
         return $logSet;
     }
-    
-    public function fetchById($id){
-        $logClass =  new log_activity_method();
+
+    public function fetchById($id) {
+
         $sql = "SELECT * FROM `log_activity` WHERE `log_id` = $id";
-        $stmt = $logClass->connect->query($sql);
+        $stmt = $this->connect->query($sql);
         foreach ($stmt as $value) {
             $logSet[] = $value;
         }
         return $logSet;
     }
-    
-    public function insertLog(){
+
+    public function insertLog() {
+        try {
+            $sql = "INSERT INTO `log_activity`( `admin_id`, `date`, `time`) VALUES"
+                    . " ($this->admin_id , '$this->date' , $this->time)";
+            $this->connect->query($sql);
+            echo 'Successfully Adding';
+        } catch (Exception $ex) {
+            echo 'Failed Adding';
+        }
+    }
+
+    public function deleteLog($id) {
         $logClass = new log_activity_method();
-        $sql   = "INSERT INTO `log_activity`( `admin_id`, `date`, `time`) VALUES"
-                . " ($logClass->admin_id , '$logClass->date' , $logClass->time)";
+        $sql = "DELETE FROM `log_activity` WHERE `log_id` = $id";
         $logClass->connect->query($sql);
     }
-    
-    public function deleteLog($id){
-        $logClass = new log_activity_method();
-        $sql  = "DELETE FROM `log_activity` WHERE `log_id` = $id";
-        $logClass->connect->query($sql);
+
+    public function updateLog($id) {
+        try {
+            $sql = "UPDATE `log_activity` SET "
+                    . "`admin_id`=$this->admin_id,`date`='$this->date',`time`='$this->time' WHERE `log_id` = $id";
+            $this->connect->query($sql);
+            echo 'Successfully Updating ';
+        } catch (Exception $ex) {
+            echo 'Failed Updating ';
+        }
     }
-    
-    public function updateLog($id){
-        $logClass = new log_activity_method();
-        $sql  ="UPDATE `log_activity` SET "
-                . "`admin_id`=$logClass->admin_id,`date`='$logClass->date',`time`='$logClass->time' WHERE `log_id` = $id";
-    
-        $logClass->connect->query($sql);
-    }
-    
+
 }
