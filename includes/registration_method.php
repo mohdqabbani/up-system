@@ -1,6 +1,5 @@
 <?php
 
-require 'connection.php';
 
 class registration_method extends connection {
 
@@ -21,11 +20,20 @@ class registration_method extends connection {
     public $discount_percetage;
 
     public function fetchAll() {
+        $regClass =  new registration_method();
+        $sql      = "SELECT * FROM `registration`";
+        $stmt = $this->connect->query($sql);
+        foreach ($stmt as $value) {
+            $registrationSet[] = $value;
+        }
+        return $registrationSet;
         
     }
 
     public function fetchById($id) {
-        
+        $sql = "SELECT * FROM `registration` WHERE reg_id = $id";
+        $stmt = $this->connect->query($sql);
+        return $stmt;
     }
 
     public function insertReg() {
@@ -41,11 +49,20 @@ class registration_method extends connection {
     }
 
     public function deleteReg($id) {
-        
+        $regClass = new registration_method();
+        $sql      = "DELETE FROM `registration` WHERE `reg_id` = $id";
+        $stmt = $regClass->connect->query($sql);
     }
 
     public function updateReg($id) {
+        $regClass         = new registration_method();
         
+        $sql = "UPDATE `registration` SET `std_id`=$regClass->std_id,`admin_id`=$regClass->admin_id,"
+                . "`course_name`='$regClass->course_name',`course_hours`='$regClass->course_hours',`course_time`='$regClass->course_time',"
+                . "`course_days`='$regClass->course_days',`course_start_date`='$regClass->course_start_date',`course_end_date`='$regClass->course_end_date',"
+                . "`course_test_result`=$regClass->course_test_result,`course_fees`=$regClass->course_fees,`payment_method`='$regClass->payment_method',"
+                . "`payment_type`='$regClass->payment_type',`discount_amount`=$regClass->discount_amount,`discount_percentage`='$regClass->discount_percetage' WHERE `reg_id`= $id";
+        $regClass->connect->query($sql);
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-require 'connection.php';
+//require 'connection.php';
 
 class student_method extends connection {
 

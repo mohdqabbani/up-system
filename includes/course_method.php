@@ -1,6 +1,6 @@
 <?php
 
-require 'connection.php';
+//require 'connection.php';
 
 class course_method extends connection {
 
@@ -14,13 +14,12 @@ class course_method extends connection {
     public $course_fees;
 
     public function fetchAll() {
-        $courseClass =  new course_method();
-        $courseSet   = array();
         $sql         = "SELECT * FROM `course`";
         $stms = $this->connect->query($sql);
         foreach ($stms as $value) {
-            $courseSet = $value;
+            $courseSet[] = $value;
         }
+        return $courseSet;
     }
 
     public function fetchById($id) {

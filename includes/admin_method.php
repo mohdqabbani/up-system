@@ -13,10 +13,11 @@ class admin_method extends connection {
     public function fetchall() {
         $sql = "SELECT * FROM `admin` ";
         $stmt = $this->connect->query($sql);
-        $adminSet = array();
         foreach ($stmt as $value) {
             $adminSet[] = $value;
         }
+        return $adminSet;
+        
     }
 
     public function fetchById($id) {
@@ -45,7 +46,6 @@ class admin_method extends connection {
         $sql = "UPDATE `admin` SET `admin_name`='$this->admin_name',`admin_username`='$this->admin_username',"
                 . "`admin_password`='$this->admin_password',`admin_status`=$this->admin_status WHERE `admin_id` = $id";
         $stmt = $this->connect->query($sql);
-        
     }
 
 }
