@@ -21,10 +21,10 @@ class student_method extends connection {
     public function fetchAll() {
         $sql = "SELECT * FROM `student`";
         $stmt = $this->connect->query($sql);
-        $studentSet = array();
         foreach ($stmt as $value) {
             $studentSet[] = $value;
         }
+        return $studentSet;
     }
 
     public function fetchById($id) {
@@ -45,7 +45,7 @@ class student_method extends connection {
                     . "'$this->std_id_copy','$this->std_address',"
                     . "$this->std_age,'$this->std_gender','$this->std_dob',$this->std_ref_mobile,'$this->std_notes',$this->std_active)";
             $stmt = $this->connect->query($sql);
-            echo 'Successfully Adding ';
+            return true;
         } catch (Exception $ex) {
             echo 'Failed Adding ' . $ex->getMessage();
         }
@@ -57,7 +57,7 @@ class student_method extends connection {
             $sql = "UPDATE `student` SET `std_name`='$this->std_name', `std_mobile`='$this->std_mobile', "
                     . "`std_email`='$this->std_email', `std_active`=0 WHERE`std_id` = $id";
             $this->connect->query($sql);
-            echo 'Successfully Deleting';
+            return true;
         } catch (Exception $ex) {
             echo 'Failed Deleting ' . $ex->getMessage();
         }
@@ -74,7 +74,7 @@ class student_method extends connection {
                     . "`notes`='$this->std_notes',"
                     . "`std_active`= 1 WHERE `std_id` = $id";
             $this->connect->query($sql);
-            echo 'Successfully Updating';
+            return true;
         } catch (Exception $ex) {
             echo 'Failed Updating ' . $ex->getMessage();
         }

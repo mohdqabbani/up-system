@@ -29,7 +29,7 @@ class privileges_method extends connection {
         try {
             $sql = "INSERT INTO `privileges`(`admin_id`, `pages`) VALUES ([$this->admin_id,$this->pages)";
             $this->connect->query($sql);
-            echo 'Successfully Ading';
+           return true ;
         } catch (Exception $ex) {
             echo 'Failed Adding ' . $ex->getMessage();
         }
@@ -39,7 +39,7 @@ class privileges_method extends connection {
         try {
             $sql = "DELETE FROM `privileges` WHERE `priv_id` = $id";
             $this->connect->exec($sql);
-            echo 'Successfully Deleting ';
+           return true ;
         } catch (Exception $ex) {
             echo 'Failed Deleting' . $ex->getMessage();
         }
@@ -50,7 +50,7 @@ class privileges_method extends connection {
             $sql = "UPDATE `privileges` SET `admin_id`=$this->admin_id,`pages`=$this->pages"
                     . " WHERE `priv_id` = $id";
             $thi->connect->exec($sql);
-            echo 'Successfully Updating';
+            return true ;
         } catch (Exception $ex) {
             echo 'Failed Updating ' . $ex->getMessage();
         }

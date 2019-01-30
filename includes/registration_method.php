@@ -45,7 +45,7 @@ class registration_method extends connection {
                     . "'$this->course_end_date',$this->course_test_result,$this->course_fees,'$this->payment_method',"
                     . "'$this->payment_type',$this->discount_amount,'$this->discount_percetage')";
             $stmt = $this->connect->query($sql);
-            echo 'Successfully Adding';
+          return true ;
         } catch (Exception $ex) {
             echo 'Failed Adding ' . $ex->getMessage();
         }
@@ -55,7 +55,7 @@ class registration_method extends connection {
         try {
             $sql = "DELETE FROM `registration` WHERE `reg_id` = $id";
             $stmt = $this->connect->query($sql);
-            echo 'Successfully Deleting';
+            return true ;
         } catch (Exception $ex) {
             echo 'Failed Deleting' . $ex->getMessage();
         }
@@ -69,7 +69,7 @@ class registration_method extends connection {
                     . "`course_test_result`=$this->course_test_result,`course_fees`=$this->course_fees,`payment_method`='$this->payment_method',"
                     . "`payment_type`='$this->payment_type',`discount_amount`=$this->discount_amount,`discount_percentage`='$this->discount_percetage' WHERE `reg_id`= $id";
             $this->connect->query($sql);
-            echo 'Successfully Updating';
+           return true ;
         } catch (Exception $ex) {
             echo 'Failed Updating ' . $ex->getMessage();
         }

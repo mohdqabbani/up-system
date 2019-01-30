@@ -34,7 +34,7 @@ class log_activity_method extends connection {
             $sql = "INSERT INTO `log_activity`( `admin_id`, `date`, `time`) VALUES"
                     . " ($this->admin_id , '$this->date' , $this->time)";
             $this->connect->query($sql);
-            echo 'Successfully Adding';
+           return true ;
         } catch (Exception $ex) {
             echo 'Failed Adding';
         }
@@ -51,7 +51,7 @@ class log_activity_method extends connection {
             $sql = "UPDATE `log_activity` SET "
                     . "`admin_id`=$this->admin_id,`date`='$this->date',`time`='$this->time' WHERE `log_id` = $id";
             $this->connect->query($sql);
-            echo 'Successfully Updating ';
+            return true ;
         } catch (Exception $ex) {
             echo 'Failed Updating ';
         }

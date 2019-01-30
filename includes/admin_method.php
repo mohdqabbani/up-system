@@ -22,7 +22,7 @@ class admin_method extends connection {
     public function fetchById($id) {
         $sql = "SELECT * FROM `admin` WHERE `admin_id` = $id";
         $stmt = $this->connect->query($sql);
-        $stmt->fetchAll();
+        return $stmt;
     }
 
     public function insertAdmin() {
@@ -31,7 +31,7 @@ class admin_method extends connection {
                     . "`admin_password`, `admin_status`) VALUES "
                     . "('$this->admin_name','$this->admin_username','$this->admin_password',$this->admin_status)";
             $this->connect->query($sql);
-            echo 'Admin added Successfully ';
+            return TRUE;
         } catch (Exception $e) {
             echo 'Admin Doesn`t added successfully ' . $e->getMessage();
         }
@@ -42,7 +42,7 @@ class admin_method extends connection {
             $id = $this->admin_id;
             $sql = "DELETE FROM `admin` WHERE `admin_id` = $id";
             $this->connect->query($sql);
-            echo 'Admin Was Deleted Successfully ';
+            return true;
         } catch (Exception $ex) {
             echo 'Admin Dosen`t Deleted Successfully' . $ex->getMessage();
         }
@@ -54,6 +54,7 @@ class admin_method extends connection {
             $sql = "UPDATE `admin` SET `admin_name`='$this->admin_name',`admin_username`='$this->admin_username',"
                     . "`admin_password`='$this->admin_password',`admin_status`=$this->admin_status WHERE `admin_id` = $id";
             $this->connect->query($sql);
+            return true;
         } catch (Exception $ex) {
             echo 'Update Not Successed' . $ex->getMessage();
         }

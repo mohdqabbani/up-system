@@ -33,10 +33,10 @@ class course_method extends connection {
             $sql = "INSERT INTO `course`(`course_name`, `course_start_date`, `course_end_date`, "
                     . "`course_time`,`course_hours`, `course_day`, `course_fees`) VALUES"
                     . " ('$this->course_name','$this->course_start_date',"
-                    . "'$this->course_end_date',$this->course_time,"
+                    . "'$this->course_end_date','$this->course_time',"
                     . "'$this->course_hours','$this->course_day',$this->course_fees)";
             $this->connect->query($sql);
-            echo 'Successfully adding ';
+            return true ;
         } catch (Exception $ex) {
             echo 'Failed Adding' . $ex->getMessage();
         }
@@ -47,7 +47,7 @@ class course_method extends connection {
             $id = $this->course_id;
             $sql = "DELETE FROM `course` WHERE `course_id` = $id";
             $this->connect->query($sql);
-            echo 'Successfully adding';
+           return true ;
         } catch (Exception $ex) {
             echo 'Failed Delete ' . $ex->getMessage();
         }
@@ -60,7 +60,7 @@ class course_method extends connection {
                     . "`course_time`='$this->course_time',`course_end_date`='$this->course_end_date',`course_hours`='$this->course_hours',`course_day`='$this->course_day',"
                     . "`course_fees`=$this->course_fees WHERE `course_id` = $id";
             $this->connect->query($sql);
-            echo 'Successfully Updating ';
+            return true ;
         } catch (Exception $ex) {
             echo 'Failed Updating ' . $ex->getMessage();
         }

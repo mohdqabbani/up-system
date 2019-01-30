@@ -36,6 +36,7 @@ class payment_method extends connection {
                     . "$this->payment_amount,$this->admin_id"
                     . "'$this->received_from',$this->check_no,'$this->bank')";
             $this->connect->exec($sql);
+            return true ;
         } catch (Exception $ex) {
             echo 'Failed Adding ' . $ex->getMessage();
         }
@@ -45,6 +46,7 @@ class payment_method extends connection {
         try {
             $sql = "DELETE FROM `payment` WHERE `payment_id` = $id";
             $this->connect->query($sql);
+            return true ;
         } catch (Exception $ex) {
             echo 'Failed Delete ' . $ex->getMessage();
         }
@@ -56,7 +58,7 @@ class payment_method extends connection {
                     . "`payment_amount`=$this->payment_amount,`admin_id`=$this->admin_id,`received_from`='$this->received_from',"
                     . "`check_no`=$this->check_no,`bank`='$this->bank' WHERE `payment_id`=$id";
             $this->connect->query($sql);
-            echo 'Successfully Updating ';
+            return true ;
         } catch (Exception $ex) {
             echo 'Failed Updating ' . $ex->getMessage();
         }
