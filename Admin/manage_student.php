@@ -52,7 +52,7 @@ if (isset($_POST['insert'])) {
                                 <form action="" method="post" novalidate="novalidate" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="cc-payment" class="control-label mb-1">Student Name</label>
-                                        <input id="cc-pament" name="std_name" type="text" class="form-control" aria-required="true" aria-invalid="false>
+                                        <input id="cc-pament" name="std_name" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                </div>
                                                <div class="form-group has-success " >
                                                <label for="cc-name" class="control-label mb-1">Student Mobile </label>

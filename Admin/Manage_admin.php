@@ -37,7 +37,7 @@ if (isset($_POST['insert'])) {
                             <form action="" method="post" novalidate="novalidate">
                                 <div class="form-group">
                                     <label for="cc-payment" class="control-label mb-1">Full Name</label>
-                                    <input id="cc-pament" name="admin_name" type="text" class="form-control" aria-required="true" aria-invalid="false>
+                                    <input id="cc-pament" name="admin_name" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                            </div>
                                            <div class="form-group has-success">
                                            <label for="cc-name" class="control-label mb-1">User Name </label>

@@ -1,13 +1,45 @@
 <?php
+
 include_once 'includes/header.php';
 include_once '../includes/dispatcher.php';
-if (isset($_POST['insert'])) {
-    $payment = new payment_method();
-    $register = new registration_method();
-    $admin = new admin_method();
-    $course = new course_method();
+
+if (isset($_GET['Register_Student'])) {
+    echo '<script>window.location.href="manage_student.php"</script>';
+}
+if (isset($_GET['Register_Course'])) {
+
+    $name = $_GET['Register_Course'];
+
+    header("Location: manage_registration.php");
 }
 ?>
+<script>
+    $('document').ready(function () {
+        $('#name').keyup(function () {
+            var std_name = $("#name").val();
+
+            $.ajax({
+                type: 'GET',
+                url: "search.php?user_name=" + std_name,
+                cache: false,
+                success: function (data) {
+                    $('#nameList').fadeIn();
+                    $('#nameList').html(data);
+                    
+                }
+            });
+
+
+        });
+        $(document).on('click', 'li', function () {
+            $('#name').val($(this).text());
+            $('#nameList').fadeOut();
+            $('#nameList').
+        });
+
+
+    });
+</script>
 <body>
     <div class="main-content">
         <div class="section__content section__content--p30">
@@ -21,111 +53,17 @@ if (isset($_POST['insert'])) {
                                     <h3 class="text-center title-2">Manage Registration</h3>
                                 </div>
                                 <hr>
-                                <form action="" method="post" novalidate="novalidate">
+                                <form action="" method="get" novalidate="novalidate">
                                     <div class="form-group">
-                                        <!--<label for="cc-payment" class="control-label mb-1">Student ID</label>-->
-                                        <!--<input id="cc-pament" name="course_name" type="text" class="form-control" aria-required="true" aria-invalid="false">-->
+                                        <label  for="cc-name" class="control-label mb-1">Student Search</label>
+                                        <input id="name"  name="std_name" type="text" class="form-control cc-name valid">
+                                        <div id="nameList"></div>
                                     </div>
-                                    <div class="form-group has-success">
-                                        <label for="cc-name" class="control-label mb-1">Course Name</label>
-                                        <input id="cc-name" name="course_name" type="text" class="form-control cc-name valid" data-val="true" 
-                                               autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                    </div>
-                                    <div class="form-group has-success">
-                                        <label for="cc-name" class="control-label mb-1">Course Hours </label>
-                                        <input id="cc-name" name="course_hours" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
-                                               autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                    </div>
+                                </form>
+                                <form method="get">
                                     <div class="form-group">
-                                        <label for="cc-number" class="control-label mb-1">Course Time</label>
-                                        <select name="course_time" id="select" class="form-control">
-                                            <option >2-3</option>
-                                            <option>3-4</option>
-
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group has-success">
-                                        <label for="cc-name" class="control-label mb-1">Course Days </label>
-                                        <input id="cc-name" name="course_days" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
-                                               autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-success">
-                                        <label for="cc-name" class="control-label mb-1">Course Sart Date</label>
-                                        <input id="cc-name" name="course_start_date" type="date" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
-                                               autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-success">
-                                        <label for="cc-name" class="control-label mb-1">Course End Date </label>
-                                        <input id="cc-name" name="course_end_date" type="date" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
-                                               autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-success">
-                                        <label for="cc-name" class="control-label mb-1">Course Test Result</label>
-                                        <input id="cc-name" name="course_test_result" type="number" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
-                                               autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-success">
-                                        <label for="cc-name" class="control-label mb-1">Course Fees</label>
-                                        <input id="cc-name" name="course_fees" type="number" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
-                                               autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-success">
-
-                                        <label for="cc-number" class="control-label mb-1">Payment Method</label>
-                                        <select name="payment_method" id="select" class="form-control">
-                                            <option >visa</option>
-                                            <option>check</option>
-                                            <option>cash</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group has-success">
-
-                                        <label for="cc-number" class="control-label mb-1">Payment Type</label>
-                                        <select name="payment_type" id="select" class="form-control">
-                                            <option >Cash</option>
-                                            <option>Payments</option>
-
-
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group has-success">
-                                        <label for="cc-name" class="control-label mb-1">Discount Amount</label>
-                                        <input id="cc-name" name="discount_amount" type="number" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
-                                               autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-success">
-                                        <label for="cc-name" class="control-label mb-1">Discount Persantage</label>
-                                        <input id="cc-name" name="discount_percentage" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
-                                               autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                    </div>
-
-
-
-
-                                    <div>
-                                        <button name="insert" id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                            <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                            <span id="payment-button-amount">Insert</span>
-                                            <span id="payment-button-sending" style="display:none;">Sending…</span>
-                                        </button>
+                                        <button class="btn-lg btn-danger" type="submit" name="Register_Course">Register Course </button>
+                                        <button  class="btn-lg btn-danger" type="submit" name="Register_Student">Register Student</button>
                                     </div>
                                 </form>
                             </div>

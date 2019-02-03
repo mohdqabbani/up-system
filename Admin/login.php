@@ -36,7 +36,7 @@ if (isset($_POST['login'])) {
                 <!-- Login Form -->
                 <form method="post">
                     <input type="text" id="login" class="fadeIn second" name="username" placeholder="User Name">
-                    <input type="text" id="password" class="fadeIn third" name="password" placeholder="Password">
+                    <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
                     <input type="submit" class="fadeIn fourth" value="Log In" name="login">
                 </form>
 
